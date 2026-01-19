@@ -17,12 +17,16 @@ public class NoteController {
     }
 
     @GetMapping
-    public List<Note> getAllNotes() {
+    public List<Note> getNotes() {
         return noteService.getAllNotes();
     }
-    @PostMapping
-    public Note createNote(@RequestBody Note note) {
-        return noteService.createNote(note);
-    }
 
+    @PostMapping
+    public Note createNote(@RequestBody Map<String, String> body) {
+        return noteService.createNote(
+                body.get("title"),
+                body.get("content")
+        );
+    }
 }
+

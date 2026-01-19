@@ -4,9 +4,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/notesdb
-    username: notes_user
-    password: notes_pass
-    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
 
   jpa:
     hibernate:
@@ -15,7 +14,3 @@ spring:
     properties:
       hibernate:
         format_sql: true
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-
-server:
-  port: 8080

@@ -1,26 +1,26 @@
 package cl.sebaflores.notesapi.service;
 
 import cl.sebaflores.notesapi.domain.Note;
+import cl.sebaflores.notesapi.repository.NoteRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class NoteService {
 
-    private final List<Note> notes = new ArrayList<>();
-    private final AtomicLong nextId = new AtomicLong(1);
+    private final NoteRepository noteRepository;
+
+    public NoteService(NoteRepository noteRepository) {
+        this.noteRepository = noteRepository;
+    }
 
     public List<Note> getAllNotes() {
-        return notes;
+        return noteRepository.findAll();
     }
 
-    public Note createNote(Note note) {
-        note.setId(nextId.getAndIncrement());
-        notes.add(note);
-        return note;
+    public Note createNote(String title, String content) {
+        Note note = new Note(title, content);
+        return noteRepository.save(note);
     }
-
 }
